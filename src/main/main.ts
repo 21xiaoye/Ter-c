@@ -1,18 +1,25 @@
 import {app, BrowserWindow, ipcMain, session} from 'electron';
 import {join} from 'path';
 
+
+let mainWindow : BrowserWindow | null = null;
 function createWindow () {
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    minWidth:700,
+    minHeight:525,
     webPreferences: {
       preload: join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
     }
   });
+  
+  mainWindow.removeMenu();
 
   if (process.env.NODE_ENV === 'development') {
+    mainWindow.webContents.openDevTools();
     const rendererPort = process.argv[2];
     mainWindow.loadURL(`http://localhost:${rendererPort}`);
   }
@@ -47,5 +54,16 @@ app.on('window-all-closed', function () {
 });
 
 ipcMain.on('message', (event, message) => {
+  let path;
   console.log(message);
+  if (process.env.NODE_ENV === 'development') {
+    const rendererPort = process.argv[2];
+    path= `http://localhost:${rendererPort}/#${message}`;
+  }
+  else{
+    path = `file://${path.join(app.getAppPath(), 'renderer', 'index.html')}#${message}`;
+  }
+  console.log(path);
+  
+  mainWindow?.loadURL(path);
 })
