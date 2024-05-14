@@ -1,11 +1,12 @@
-import { createRouter,  createWebHashHistory} from 'vue-router'
-import createGuard from './guard'
+import { createRouter, createWebHashHistory } from 'vue-router';
+import createGuard from './guard';
 
-const HomeView = () => import(/* webpackChunkName: "Home" */ '../views/home/index.vue')
-const HomeChatView = () => import(/* webpackChunkName: "Home" */ '../views/chat/index.vue')
-const LoginView = () => import('../views/login/index.vue')
-const RegisterView = () => import('../views/register/index.vue')
-const SetUpView = () => import('../views/setup/index.vue')
+const HomeView = () => import('../views/home/index.vue');
+const HomeChatView = () => import('../views/chat/index.vue');
+const LoginView = () => import('../views/login/index.vue');
+const RegisterView = () => import('../views/register/index.vue');
+const SetUpView = () => import('../views/setup/index.vue');
+const ForGotPassWDView = () => import('../views/forgot/index.vue')
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -23,25 +24,33 @@ const router = createRouter({
     {
       path:'/login',
       name:'login',
-      component:LoginView
+      component: LoginView,
+      meta: { hideSidebar: true } ,
+    },
+    {
+      path: '/forgot',
+      name: 'forgot',
+      component: ForGotPassWDView,
+      meta: { hideSidebar: true } ,
     },
     {
       path:'/register',
       name:'register',
-      component:RegisterView
+      component: RegisterView,
+      meta: { hideSidebar: true } 
     },
     {
       path:'/set-up',
       name:'setup',
-      component:SetUpView
+      component: SetUpView
     },
     {
       path: '/:pathMatch(.*)*',
       redirect: '/',
     }
   ],
-})
+});
 
-createGuard(router)
+createGuard(router);
 
-export default router
+export default router;

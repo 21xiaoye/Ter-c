@@ -3,7 +3,7 @@ import type { Router } from 'vue-router'
 
 
 // 白名单，未登录用户可以访问
-const whiteList: Array<string | RegExp> = ['/login','/register','/chat','/','/set-up']
+const whiteList: Array<string | RegExp> = ['/login','/register','/chat','/','/set-up','/forgot']
 
 const whiteListTest = (path: string) => {
   return whiteList.some((o) => {

@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
 
 import { ref } from 'vue';
 interface SidebarItem {
@@ -13,7 +10,7 @@ interface SidebarItem {
 }
 
 const items = ref<SidebarItem[]>([
-    { label: '首页', icon: '/home.svg', active: true ,path:'/'},
+    { label: '首页', icon: '/home.svg', active: false ,path:'/'},
     { label: '聊天', icon: '/chat.svg', active: false, path:'/chat' },
     { label: '设置', icon: '/set-up.svg', active: false, path:'/set-up'}
 ]);
@@ -27,15 +24,17 @@ const setActive = (selectedItem:SidebarItem) =>{
     });
 }
 
-
+const login = ()=>{
+    window.electronAPI.createLoginAndRegisterWindow();
+}
 </script>
 
 
 <template>
     <main class="ter-main">
         <div class="ter-app">
-            <div id="items" class=" sidebar-container">
-                <div class="style-scope ter-mini-guide-renderer sidebar-item">
+            <div id="items" class=" sidebar-container" v-if="!$route.meta.hideSidebar">
+                <div class="style-scope ter-mini-guide-renderer sidebar-item" @click="login()">
                     <a href="#">
                         <img src="/personal.svg" alt="首页" class="icon">
                     </a>

@@ -1,36 +1,10 @@
 import {app, BrowserWindow, ipcMain, session} from 'electron';
-import {join} from 'path';
+import { createdLoginRegisterWindow ,loginRegisterWindow,createWindow,mainWindow} from './window';
+const path = require('path');
 
-
-let mainWindow : BrowserWindow | null = null;
-function createWindow () {
-  mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    minWidth:700,
-    minHeight:525,
-    webPreferences: {
-      preload: join(__dirname, 'preload.js'),
-      nodeIntegration: false,
-      contextIsolation: true,
-    }
-  });
-  
-  mainWindow.removeMenu();
-
-  if (process.env.NODE_ENV === 'development') {
-    mainWindow.webContents.openDevTools();
-    const rendererPort = process.argv[2];
-    mainWindow.loadURL(`http://localhost:${rendererPort}`);
-  }
-  else {
-    mainWindow.loadFile(join(app.getAppPath(), 'renderer', 'index.html'));
-  }
-}
 
 app.whenReady().then(() => {
   createWindow();
-
   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
     callback({
       responseHeaders: {
@@ -54,16 +28,28 @@ app.on('window-all-closed', function () {
 });
 
 ipcMain.on('message', (event, message) => {
-  let path;
-  console.log(message);
+
   if (process.env.NODE_ENV === 'development') {
     const rendererPort = process.argv[2];
-    path= `http://localhost:${rendererPort}/#${message}`;
+    let path = `http://localhost:${rendererPort}/#${message}`
+    console.log(path);
+    
+    mainWindow?.loadURL(`http://localhost:${rendererPort}/#${message}`);
+  }else{
+    // mainWindow?.loadFile(`file://${path.join(app.getAppPath(), 'renderer', 'index.html')}#${message}`);
+    mainWindow?.loadFile(path.join(app.getAppPath(), 'renderer', 'index.html', `#${path}`));
+  }
+})
+
+ipcMain.on('create-login-register-window',()=>{
+  createdLoginRegisterWindow();
+  if(process.env.NODE_ENV === 'development'){
+    const rendererPort = process.argv[2];
+    loginRegisterWindow?.loadURL(`http://localhost:${rendererPort}/#/login`);
   }
   else{
-    path = `file://${path.join(app.getAppPath(), 'renderer', 'index.html')}#${message}`;
+    loginRegisterWindow?.loadFile(path.join(app.getAppPath(), 'renderer', 'index.html', '#/login'));
   }
-  console.log(path);
-  
-  mainWindow?.loadURL(path);
 })
+
+
