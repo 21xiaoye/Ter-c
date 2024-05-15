@@ -10,171 +10,129 @@ const handleSubmit = () => {
 </script>
 
 <template>
-    <div class="form">
-        <span class="close" @click="handleSubmit">X</span>
+    <div class="otp-Form">
+        <span class="mainHeading">一次性验证码</span>
+        <p class="otpSubheading">我们已将验证码发送至您的邮箱</p>
+        <div class="inputContainer">
+            <input required maxlength="1" type="text" class="otp-input" id="otp-input1">
+            <input required maxlength="1" type="text" class="otp-input" id="otp-input2">
+            <input required maxlength="1" type="text" class="otp-input" id="otp-input3">
+            <input required maxlength="1" type="text" class="otp-input" id="otp-input4">
 
-        <div class="info">
-            <span class="title">Two-Factor Verification</span>
-            <p class="description">Enter the two-factor authentication code provided by the authenticator app </p>
         </div>
-        <div class="input-fields">
-            <input maxlength="1" type="tel" placeholder="">
-            <input maxlength="1" type="tel" placeholder="">
-            <input maxlength="1" type="tel" placeholder="">
-            <input maxlength="1" type="tel" placeholder="">
-        </div>
-
-        <div class="action-btns">
-            <a href="#" class="verify">Verify</a>
-            <a href="#" class="clear">Clear</a>
-        </div>
-
+        <button class="verifyButton" type="submit">验证</button>
+        <button class="exitBtn" @click="handleSubmit">×</button>
+        <p class="resendNote">没有收到验证码?<button class="resendBtn">重新发送</button></p>
     </div>
 </template>
 
 
 <style lang="less" scoped>
-.form {
-    --black: #ffffff;
-    --ch-black: #141414;
-    --eer-black: #1b1b1b;
-    --night-rider: #060606;
-    --white: #ffffff;
-    --af-white: #f3f3f3;
-    --ch-white: #e1e1e1;
-    --tomato: #fa5656;
-    font-family: Helvetica, sans-serif;
-    padding: 25px;
+.otp-Form {
+    width: 230px;
+    height: 300px;
+    background-color: rgb(255, 255, 255);
     display: flex;
-    max-width: 420px;
     flex-direction: column;
     align-items: center;
-    overflow: hidden;
-    color: var(--af-white);
-    background-color: var(--black);
-    border-radius: 8px;
+    justify-content: center;
+    padding: 20px 30px;
+    gap: 20px;
     position: relative;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, .1);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.082);
+    border-radius: 15px;
 }
 
-/*----heading and description-----*/
+.mainHeading {
+    font-size: 1.1em;
+    color: rgb(15, 15, 15);
+    font-weight: 700;
+}
 
-.info {
-    margin-bottom: 20px;
+.otpSubheading {
+    font-size: 0.7em;
+    color: black;
+    line-height: 17px;
+    text-align: center;
+}
+
+.inputContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.otp-input {
+    background-color: rgb(228, 228, 228);
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: none;
+    border-radius: 7px;
+    caret-color: rgb(127, 129, 255);
+    color: rgb(44, 44, 44);
+    outline: none;
+    font-weight: 600;
+}
+
+.otp-input:focus,
+.otp-input:valid {
+    background-color: rgba(127, 129, 255, 0.199);
+    transition-duration: .3s;
+}
+
+.verifyButton {
+    width: 100%;
+    height: 30px;
+    border: none;
+    background-color: rgb(127, 129, 255);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 10px;
+    transition-duration: .2s;
+}
+
+.verifyButton:hover {
+    background-color: rgb(144, 145, 255);
+    transition-duration: .2s;
+}
+
+.exitBtn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.171);
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    border: none;
+    color: black;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.resendNote {
+    font-size: 0.7em;
+    color: black;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    color: var(--ch-black);
+    justify-content: center;
+    gap: 5px;
 }
 
-.title {
-    font-size: 1.5rem;
-    font-weight: 900;
-}
-
-.description {
-    margin-top: 10px;
-    font-size: 1rem;
-}
-
-/*----input-fields------*/
-
-.form .input-fields {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-.form .input-fields input {
-    height: 2.5em;
-    width: 2.5em;
-    outline: none;
-    text-align: center;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 1.5rem;
-    color: var(--af-white);
-    border-radius: 5px;
-    border: 2.5px solid var(--eer-black);
-    background-color: var(--eer-black);
-}
-
-.form .input-fields input:focus {
-    border: 1px solid var(--af-white);
-    box-shadow: inset 10px 10px 10px rgba(0, 0, 0, .15);
-    transform: scale(1.05);
-    transition: 0.5s;
-}
-
-/*-----verify and clear buttons-----*/
-
-.action-btns {
-    display: flex;
-    margin-top: 20px;
-    gap: 0.5rem;
-}
-
-.verify {
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--night-rider);
-    text-shadow: none;
-    background: var(--af-white);
-    box-shadow: transparent;
-    border: 1px solid var(--af-white);
-    transition: 0.3s ease;
-    user-select: none;
-}
-
-.verify:hover,
-.verify:focus {
-    color: var(--night-rider);
-    background: var(--white);
-}
-
-.clear {
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--ch-white);
-    text-shadow: none;
-    background: transparent;
-    border: 1px solid var(--ch-white);
-    transition: 0.3s ease;
-    user-select: none;
-}
-
-.clear:hover,
-.clear:focus {
-    color: var(--tomato);
+.resendBtn {
     background-color: transparent;
-    border: 1px solid var(--tomato);
-}
-
-
-.close {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    background-color: var(--night-rider);
-    color: var(--ch-white);
-    height: 30px;
-    width: 30px;
-    display: grid;
-    place-items: center;
-    border-radius: 5px;
+    border: none;
+    color: rgb(127, 129, 255);
     cursor: pointer;
-    font-weight: 600;
-    transition: .5s ease;
-}
-
-.close:hover {
-    background-color: var(--tomato);
-    color: var(--white);
+    font-size: 1.1em;
+    font-weight: 700;
 }
 </style>

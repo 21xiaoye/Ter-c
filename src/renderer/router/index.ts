@@ -7,6 +7,7 @@ const LoginView = () => import('../views/login/index.vue');
 const RegisterView = () => import('../views/register/index.vue');
 const SetUpView = () => import('../views/setup/index.vue');
 const ForGotPassWDView = () => import('../views/forgot/index.vue')
+const TripartiteView = () => import('../views/login/tripartite/index.vue')
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,12 @@ const router = createRouter({
       name:'login',
       component: LoginView,
       meta: { hideSidebar: true } ,
+    },
+    {
+      path:'/tripartite',
+      name:'tripartite',
+      component:TripartiteView,
+      meta:{ hideSidebar: true }
     },
     {
       path: '/forgot',

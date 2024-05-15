@@ -6,24 +6,20 @@ const router = useRouter();
 const isShow  = ref(true);
 import SendEmailCode from '../../components/sendEmailCode.vue';
 import EmailCode from '../../components/emailCode.vue';
-const toLogin = () => {
-    router.push('/login');
+const switchRouter = (path:string)=>{
+    router.push(path);
 }
-
 const handleSubmit = () => {
     isShow.value = !isShow.value;
 };
 
-const goLogin = ()=>{
-    router.push('/login');
-}
 </script>
 
 <template>
     <div class="ter-con">
         <div class="ter-got">
             <div class="form-container" v-if="isShow">
-                <span @click="goLogin">
+                <span @click="switchRouter('/login')">
                     <el-icon>
                         <ArrowLeftBold style="width: 20px;" />
                     </el-icon>
@@ -37,7 +33,7 @@ const goLogin = ()=>{
 
                 <p class="signup-link">
                     没有账户? 前去
-                    <a class="signup-link link" @click="toLogin">注册</a>
+                    <a class="signup-link link" @click="switchRouter('/register')">注册</a>
                 </p>
             </div>
             <div class="ter-email-code">

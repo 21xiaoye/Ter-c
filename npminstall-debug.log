@@ -3,7 +3,7 @@
   registry: 'https://registry.npmmirror.com',
   pkgs: [
     {
-      name: 'particles.vue3',
+      name: 'Alova',
       version: 'latest',
       type: 'tag',
       alias: undefined,
@@ -15,7 +15,7 @@
   cacheDir: 'C:\\Users\\34746\\.npminstall_tarball',
   env: {
     npm_config_registry: 'https://registry.npmmirror.com',
-    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\34746\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","particles.vue3"],"original":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\34746\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","particles.vue3"]}',
+    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\34746\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","Alova"],"original":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\34746\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","Alova"]}',
     npm_config_user_agent: 'npminstall/7.11.1 npm/? node/v18.20.0 win32 x64',
     npm_config_cache: 'C:\\Users\\34746\\.npminstall_tarball',
     NODE: 'C:\\Program Files\\nodejs\\node.exe',

@@ -3,19 +3,19 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
-const toRegister = ()=>{
-    router.push('/register');
+const switchRouter = (path:string)=>{
+    router.push(path);
 }
 
-const toForGot = ()=>{
-    router.push('/forgot')
-}
+
+
+
 </script>
 
 <template>
     <div class="ter-con">
         <div class="ter-log">
-            <form class="form">
+            <div class="form">
                 <div class="flex-column">
                     <label>邮箱 </label>
                 </div>
@@ -38,24 +38,24 @@ const toForGot = ()=>{
                         <input type="checkbox">
                         <label> 记住你的账户 </label>
                     </div>
-                    <span class="span" @click="toForGot">忘记密码?</span>
+                    <span class="span" @click="switchRouter('/forgot')">忘记密码?</span>
                 </div>
                 <button class="button-submit">登 录</button>
-                <p class="p"> 没有账户? <span class="span" @click="toRegister">注册</span>
+                <p class="p"> 没有账户? 前去<span class="span" @click="switchRouter('/register')">注册</span>
                 </p>
                 <p class="p line">或者</p>
 
                 <div class="flex-row">
-                    <button class="btn apple">
+                    <button class="btn apple" @click="switchRouter('/tripartite')">
                         <img src="/wx.svg" />
                         微信
                     </button>
-                    <button class="btn google">
+                    <button class="btn google" @click="switchRouter('/tripartite')">
                         <img src="/google.svg" />
                         Google
                     </button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </template>
