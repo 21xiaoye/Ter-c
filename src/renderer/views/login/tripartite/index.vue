@@ -1,10 +1,29 @@
 <script setup lang="ts">
+import { computed, watchEffect } from 'vue';
+import { useWsLoginStore, LoginStatus } from '../../../stores/ws';
+import Qrcode from 'qrcode.vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
-
+const loginStore = useWsLoginStore();
+const loginQrCode = computed(()=>loginStore.loginQrCode);
+const loginStatus = computed(()=>loginStore.loginStatus);
 const toLogin = ()=>{
     router.push('/login');
 }
+const visivle = computed({
+    get(){
+        return loginStore.showLogin;
+    },
+    set(value){
+        loginStore.showLogin = value;
+    }
+})
+
+watchEffect(()=>{
+    if(visivle.value && !loginQrCode.value){
+        loginStore.getLoginQrCode();
+    }
+})
 </script>
 <template>
     <div class="ter-con">
@@ -14,8 +33,13 @@ const toLogin = ()=>{
                 <span class="mainHeading">第三方登录</span>
                 <p class="otpSubheading">使用微信扫码关注公众号完成登录</p>
                 <div class="inputContainer">
-                    <div style="width: 200px;height: 250px;background-color: red;">
-
+                    <div style="width:328px;height: 328px;">
+                        <Qrcode class="login-qrcode"
+                            v-if="loginQrCode" 
+                            :value="loginQrCode" 
+                            :size="328" 
+                            :margin="5"
+                        />
                     </div>
                 </div>
                 <button class="verifyButton" type="submit">扫码登录</button>
