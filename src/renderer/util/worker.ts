@@ -1,3 +1,4 @@
+import { WsRequestMsgType } from '../util/wsType'
 const postMsg = ({ type, value }: { type: string; value?: object }) => {
     self.postMessage(JSON.stringify({ type, value }));
 };
@@ -56,8 +57,8 @@ const initConnection = () =>{
     connection?.removeEventListener('open',onConnectOpen)
     connection?.removeEventListener('close',onConnectClose)
     connection?.removeEventListener('error',onConnectError)
-
-    connection = new WebSocket(`${import.meta.env.VITE_WS_URL}${token ? `?token=${token}`: ''}`)
+    console.log("开始进行websocket连接");
+    connection = new WebSocket(`${'ws://127.0.0.1:9001/ws'}${token ? `?token=${token}`: ''}`)
     connection.addEventListener('message',onConnectMsg)
     connection.addEventListener('open',onConnectOpen)
     connection.addEventListener('close',onConnectClose)
@@ -76,6 +77,7 @@ const onConnectClose = ()=>{
 }
 
 const onConnectOpen = () =>{
+    console.log("websocket 连接成功，开始进行心跳检测");
     postMsg({type:'open'})
     sendHeartPack()
 }

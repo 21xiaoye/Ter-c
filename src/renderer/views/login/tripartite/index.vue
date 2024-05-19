@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import { computed, watchEffect } from 'vue';
 import { useWsLoginStore, LoginStatus } from '../../../stores/ws';
 import Qrcode from 'qrcode.vue';
@@ -18,9 +19,11 @@ const visivle = computed({
         loginStore.showLogin = value;
     }
 })
-
+const resetQrCode = ()=>{
+    loginStore.getLoginQrCode();
+}
 watchEffect(()=>{
-    if(visivle.value && !loginQrCode.value){
+    if(!visivle.value && !loginQrCode.value){    
         loginStore.getLoginQrCode();
     }
 })
@@ -29,22 +32,21 @@ watchEffect(()=>{
     <div class="ter-con">
         <div class="ter-tri">
             <div class="otp-Form">
-
                 <span class="mainHeading">第三方登录</span>
                 <p class="otpSubheading">使用微信扫码关注公众号完成登录</p>
                 <div class="inputContainer">
                     <div style="width:328px;height: 328px;">
-                        <Qrcode class="login-qrcode"
-                            v-if="loginQrCode" 
-                            :value="loginQrCode" 
-                            :size="328" 
-                            :margin="5"
-                        />
+                        <Qrcode class="login-qrcode" v-if="loginQrCode" :value="loginQrCode" :size="328" :margin="5" />
                     </div>
                 </div>
-                <button class="verifyButton" type="submit">扫码登录</button>
+                <p class="login-desc" v-if="loginStatus === LoginStatus.Init">
+                    使用「<strong class="login-desc-bold">微信</strong>」扫描二维码登录~~
+                </p>
+                <p class="login-desc" v-if="loginStatus === LoginStatus.Waiting">
+                    扫码成功~，点击“登录”继续登录
+                </p>
                 <button class="exitBtn" @click="toLogin">×</button>
-                <p class="resendNote">验证码失效?<button class="resendBtn">重新获取</button></p>
+                <p class="resendNote">验证码失效?<button class="resendBtn" @click="resetQrCode">重新获取</button></p>
             </div>
         </div>
     </div>
@@ -64,7 +66,7 @@ watchEffect(()=>{
         height: 100vh;
         .otp-Form {
             width: 400px;
-            height: 500px;
+            height: 600px;
             background-color: rgb(255, 255, 255);
             display: flex;
             flex-direction: column;
@@ -97,16 +99,6 @@ watchEffect(()=>{
             gap: 10px;
             align-items: center;
             justify-content: center;
-        }
-        .verifyButton {
-            width: 50%;
-            height: 30px;
-            border: none;
-            background-color: rgb(127, 129, 255);
-            color: white;
-            font-weight: 600;
-            border-radius: 10px;
-            transition-duration: .2s;
         }
         .exitBtn{
             position: absolute;

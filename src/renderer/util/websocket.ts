@@ -4,10 +4,11 @@ import {
     WsResponseMessageType
 } from './wsType';
 
+
 import { useUserStore } from '../stores/user'
 import shakeTitle from './shakeTitle'
 import { worker } from './initWorker';
-import { useWsLoginStore } from '../stores/ws';
+import { useWsLoginStore,LoginStatus } from '../stores/ws';
 
 
 class WS{
@@ -39,16 +40,22 @@ class WS{
 
     onMessage = (value: string)=>{
         const params:{type:WsResponseMessageType; data:unknown} = JSON.parse(value);
+        const loginStore = useWsLoginStore();
+        const userStore = useUserStore()
         switch(params.type){
             case WsResponseMessageType.LoginQrCode:{
                 const data = params.data as LoginInitResType;
+                loginStore.loginQrCode = data.loginUrl
                 break;
             }
             case WsResponseMessageType.WaitingAuthorize:{
+                loginStore.loginStatus = LoginStatus.Waiting
                 break;
             }
             case WsResponseMessageType.LoginSuccess:{
-
+                userStore.isSign = true
+                loginStore.loginStatus = LoginStatus.Success;
+                break;
             }
         }
     }
@@ -90,7 +97,7 @@ class WS{
                     this.send(task);
                 })
                 this.#tasks = [];
-            }else{
+            }else{              
                 loginStore.loginQrCode && loginStore.getLoginQrCode();
             }
         },500);
