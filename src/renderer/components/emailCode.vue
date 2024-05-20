@@ -1,7 +1,15 @@
 <script setup lang="ts">
-// import { ref } from 'vue';
+import { defineProps, toRefs } from 'vue';
+const props = defineProps({
+    open: {
+        type: Boolean,
+        default: false 
+    }
+});
 
+const { open } = toRefs(props);
 // const code = ref('');
+
 const emit = defineEmits(['close']);
 
 const handleSubmit = () => {
@@ -10,7 +18,7 @@ const handleSubmit = () => {
 </script>
 
 <template>
-    <div class="otp-Form">
+    <div class="otp-Form" v-if="open">
         <span class="mainHeading">一次性验证码</span>
         <p class="otpSubheading">我们已将验证码发送至您的邮箱</p>
         <div class="inputContainer">
@@ -29,8 +37,8 @@ const handleSubmit = () => {
 
 <style lang="less" scoped>
 .otp-Form {
-    width: 230px;
-    height: 300px;
+    max-width: 230px;
+    max-height: 300px;
     background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;

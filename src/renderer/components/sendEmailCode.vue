@@ -1,18 +1,13 @@
-<template>
-    <div class="form-container">
-        <div class="form">
-            <div class="form-group">
-                <label for="email">邮箱</label>
-                <input type="email" id="email" name="email" placeholder="输入你的电子邮箱" required v-model="email">
-            </div>
-            <button class="form-submit-btn"  @click="handleSubmit">发送电子邮件</button>
-        </div>
-    </div>
-</template>
-
 <script setup lang="ts">
-import { ref } from 'vue';
+import { defineProps, toRefs, ref } from 'vue';
+const props = defineProps({
+    open: {
+        type: Boolean,
+        default: false
+    }
+});
 
+const { open } = toRefs(props);
 const email = ref('');
 const emit = defineEmits(['close']);
 
@@ -21,6 +16,17 @@ const handleSubmit = () => {
 };
 </script>
 
+<template>
+    <div class="form-container" v-if="open">  
+        <div class="form">
+            <div class="form-group">
+                <label for="email">邮箱</label>
+                <input type="email" id="email" name="email" placeholder="输入你的电子邮箱" required v-model="email">
+            </div>
+            <button class="form-submit-btn" @click="handleSubmit">发送电子邮件</button>
+        </div>
+    </div>
+</template>
 
 <style lang="less" scoped>
 .form-container {

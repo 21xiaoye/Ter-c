@@ -45,16 +45,21 @@ class WS{
         switch(params.type){
             case WsResponseMessageType.LoginQrCode:{
                 const data = params.data as LoginInitResType;
-                loginStore.loginQrCode = data.loginUrl
+                loginStore.loginQrCode = data.loginUrl;
                 break;
             }
             case WsResponseMessageType.WaitingAuthorize:{
-                loginStore.loginStatus = LoginStatus.Waiting
+                loginStore.loginStatus = LoginStatus.Waiting;
+                break;
+            }
+            case WsResponseMessageType.EmailBinding:{
+                loginStore.loginStatus = LoginStatus.Binding;
                 break;
             }
             case WsResponseMessageType.LoginSuccess:{
                 userStore.isSign = true
                 loginStore.loginStatus = LoginStatus.Success;
+                loginStore.showLogin = false
                 break;
             }
         }
