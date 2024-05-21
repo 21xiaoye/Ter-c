@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { swichRouter } from '../../main';
 import { useWsLoginStore } from '../../stores/ws';
 const loginStore = useWsLoginStore();
-const router = useRouter();
 
 const switchRouter = (path:string)=>{
     loginStore.showLogin = true;
-    router.push(path);
+    swichRouter(path);
 }
 
 

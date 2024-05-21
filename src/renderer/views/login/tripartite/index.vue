@@ -2,10 +2,9 @@
 import { computed, watchEffect, ref } from 'vue';
 import { useWsLoginStore, LoginStatus } from '../../../stores/ws';
 import Qrcode from 'qrcode.vue';
-import { useRouter } from 'vue-router';
+import { swichRouter } from '../../../main';
 import SendEmailCode from '../../../components/sendEmailCode.vue';
 import emailCode from '../../../components/emailCode.vue';
-const router = useRouter();
 const loginStore = useWsLoginStore();
 const loginQrCode = computed(() => loginStore.loginQrCode);
 const loginStatus = computed(() => loginStore.loginStatus);
@@ -18,7 +17,7 @@ const tripartiteClose = () => {
     loginStore.showLogin = false;
     isShow.value = true;
     loginStore.resetLoginState();
-    router.push('/login');
+    swichRouter('/login');
 }
 
 const visivle = computed({

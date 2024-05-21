@@ -1,14 +1,8 @@
 <script setup lang="ts">
 import emailCode from '../../components/emailCode.vue';
+import {swichRouter} from '../../main'
 import {ref} from 'vue'
 const isFromCodeShow = ref(true);
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-
-const toLogin = () => {
-    router.push('/login');
-}
 
 const handleSubmit = ()=>{
     isFromCodeShow.value = !isFromCodeShow.value;
@@ -46,14 +40,14 @@ const handleSubmit = ()=>{
                 </div>
 
 
-        
+
                 <button class="button-submit" @click="handleSubmit">注 册</button>
-                <p class="p"> 已有账户,前去 <span class="span" @click="toLogin">登录</span>
+                <p class="p"> 已有账户,前去 <span class="span" @click="swichRouter('/login')">登录</span>
                 </p>
             </form>
 
             <div>
-                <emailCode @close="handleSubmit" v-if="!isFromCodeShow"/>
+                <emailCode @close="handleSubmit" v-if="!isFromCodeShow" />
             </div>
         </div>
     </div>

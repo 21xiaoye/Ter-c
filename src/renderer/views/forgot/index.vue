@@ -1,14 +1,10 @@
 <script setup lang="ts">
+import { swichRouter } from '../../main';
 import { ref } from 'vue'
-import { useRouter } from 'vue-router';
-const router = useRouter();
 
 const isShow = ref(true);
 import SendEmailCode from '../../components/sendEmailCode.vue';
 import EmailCode from '../../components/emailCode.vue';
-const switchRouter = (path: string) => {
-    router.push(path);
-}
 const handleSubmit = () => {
     isShow.value = !isShow.value;
 };
@@ -19,7 +15,7 @@ const handleSubmit = () => {
     <div class="ter-con">
         <div class="ter-got">
             <div class="form-container">
-                <span @click="switchRouter('/login')">
+                <span @click="swichRouter('/login')">
                     <el-icon>
                         <ArrowLeftBold style="width: 20px;" />
                     </el-icon>
@@ -34,7 +30,7 @@ const handleSubmit = () => {
 
                 <p class="signup-link">
                     没有账户? 前去
-                    <a class="signup-link link" @click="switchRouter('/register')">注册</a>
+                    <a class="signup-link link" @click="swichRouter('/register')">注册</a>
                 </p>
             </div>
         </div>

@@ -15,5 +15,7 @@ app.use(pinia);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
-
+export const swichRouter = (path:string)=>{
+    router.push(path);
+}
 app.mount('#app');
