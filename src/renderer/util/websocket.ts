@@ -1,7 +1,8 @@
 import {
     LoginInitResType,
     WsReqMsgContentType,
-    WsResponseMessageType
+    WsResponseMessageType,
+    emailBindingResType
 } from './wsType';
 
 
@@ -43,16 +44,23 @@ class WS{
         const loginStore = useWsLoginStore();
         const userStore = useUserStore()
         switch(params.type){
+            // 获取登录二维码
             case WsResponseMessageType.LoginQrCode:{
                 const data = params.data as LoginInitResType;
                 loginStore.loginQrCode = data.loginUrl;
                 break;
             }
+            // 等待授权
             case WsResponseMessageType.WaitingAuthorize:{
                 loginStore.loginStatus = LoginStatus.Waiting;
                 break;
             }
+            // 绑定邮箱
             case WsResponseMessageType.EmailBinding:{
+                const data = params.data as emailBindingResType;
+                loginStore.openId = data.openId;
+                console.log("获取到后端推送的数据"+data.openId);
+                
                 loginStore.loginStatus = LoginStatus.Binding;
                 break;
             }

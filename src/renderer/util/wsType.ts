@@ -25,6 +25,7 @@ export type WsReqMsgContentType = {
 }
 
 export type LoginInitResType = { loginUrl: string }
+export type emailBindingResType = {openId : string}
 
 // export type EmailBindingResType = { loginCode:  }
 

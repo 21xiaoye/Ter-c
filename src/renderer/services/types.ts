@@ -8,6 +8,13 @@ import type {
   SexEnum,
 } from '../enums'
 
+
+export type responseType ={
+  status: number
+  message: string
+  data: string
+}
+
 export type UserInfoType = {
   /** 用户唯一标识 */
   uid: number

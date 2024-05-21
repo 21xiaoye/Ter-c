@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { defineProps, toRefs } from 'vue';
+import { defineProps, toRefs, ref } from 'vue';
+
+const code = ref('');
 const props = defineProps({
     open: {
         type: Boolean,
@@ -8,7 +10,6 @@ const props = defineProps({
 });
 
 const { open } = toRefs(props);
-// const code = ref('');
 
 const emit = defineEmits(['close']);
 
@@ -22,11 +23,12 @@ const handleSubmit = () => {
         <span class="mainHeading">一次性验证码</span>
         <p class="otpSubheading">我们已将验证码发送至您的邮箱</p>
         <div class="inputContainer">
-            <input required maxlength="1" type="text" class="otp-input" id="otp-input1">
+            <input required maxlength="1" type="text" class="otp-input" id="otp-input1" v-model="code">
             <input required maxlength="1" type="text" class="otp-input" id="otp-input2">
             <input required maxlength="1" type="text" class="otp-input" id="otp-input3">
             <input required maxlength="1" type="text" class="otp-input" id="otp-input4">
-
+            <input required maxlength="1" type="text" class="otp-input" id="otp-input5">
+            <input required maxlength="1" type="text" class="otp-input" id="otp-input6">
         </div>
         <button class="verifyButton" type="submit">验证</button>
         <button class="exitBtn" @click="handleSubmit">×</button>

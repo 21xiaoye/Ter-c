@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { defineProps, toRefs, ref } from 'vue';
+import apis from '../services/apis'
 const props = defineProps({
     open: {
         type: Boolean,
@@ -11,7 +12,10 @@ const { open } = toRefs(props);
 const email = ref('');
 const emit = defineEmits(['close']);
 
-const handleSubmit = () => {    
+const handleSubmit = async () => {
+    await apis
+        .sendEmailCode({email:email.value})
+        .send();
     emit('close');
 };
 </script>
