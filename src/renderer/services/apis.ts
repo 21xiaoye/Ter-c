@@ -1,7 +1,3 @@
-import{
-    responseType
-} from './types'
-
 import { alovaIns } from "./request";
 import urls from "./urls";
 
@@ -11,7 +7,8 @@ const putRequest = <T>(url: string, params?:any) => alovaIns.Put<T, unknown>(url
 const deleteRequest = <T>(url: string, params?:any) => alovaIns.Delete<T, unknown>(url, params);
 
 export default{
-    sendEmailCode:(params: { email: string })=> {
-        return getRequest<responseType>(urls.sendEmailCode, {params});
-    } 
+    sendEmailCode:(params: { email: string; openId: string;})=> getRequest<void>(urls.sendEmailCode, {params}),
+    emailBinding:(data: {email:string, openId:string, code: string}) => postRequest<void>(urls.emailBinding,data),
+    userLogin:(data: {userEmail:string, userPasswd: string, rememberMe:boolean}) => postRequest<void>(urls.userLogin, data),
+    userRegister:(data:{userEmail:string, userPasswd:string}) => postRequest<void>(urls.userRegister, data),
 }

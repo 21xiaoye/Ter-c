@@ -59,8 +59,6 @@ class WS{
             case WsResponseMessageType.EmailBinding:{
                 const data = params.data as emailBindingResType;
                 loginStore.openId = data.openId;
-                console.log("获取到后端推送的数据"+data.openId);
-                
                 loginStore.loginStatus = LoginStatus.Binding;
                 break;
             }

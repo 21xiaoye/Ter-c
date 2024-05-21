@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { defineProps, toRefs, ref } from 'vue';
-
+import { useWsLoginStore, } from '../stores/ws';
+import apis from '../services/apis'
+const loginStore = useWsLoginStore();
 const code = ref('');
 const props = defineProps({
     open: {
@@ -13,9 +15,15 @@ const { open } = toRefs(props);
 
 const emit = defineEmits(['close']);
 
-const handleSubmit = () => {
+const close = () => {
     emit('close');
 };
+const handleSubmit = async ()=>{
+    await apis.
+        emailBinding({ email: loginStore.email, openId: loginStore.openId, code:"YYQY73"})
+        .send();
+    close();
+}
 </script>
 
 <template>
@@ -30,8 +38,8 @@ const handleSubmit = () => {
             <input required maxlength="1" type="text" class="otp-input" id="otp-input5">
             <input required maxlength="1" type="text" class="otp-input" id="otp-input6">
         </div>
-        <button class="verifyButton" type="submit">验证</button>
-        <button class="exitBtn" @click="handleSubmit">×</button>
+        <button class="verifyButton" type="submit" @click="handleSubmit">验证</button>
+        <button class="exitBtn" @click="close">×</button>
         <p class="resendNote">没有收到验证码?<button class="resendBtn">重新发送</button></p>
     </div>
 </template>

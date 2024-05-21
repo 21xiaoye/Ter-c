@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { defineProps, toRefs, ref } from 'vue';
+import { useWsLoginStore, } from '../stores/ws';
+const loginStore = useWsLoginStore();
 import apis from '../services/apis'
+
+
 const props = defineProps({
     open: {
         type: Boolean,
@@ -13,8 +17,11 @@ const email = ref('');
 const emit = defineEmits(['close']);
 
 const handleSubmit = async () => {
+    loginStore.email = email.value;
+    console.log(loginStore.email);
+    
     await apis
-        .sendEmailCode({email:email.value})
+        .sendEmailCode({email:email.value, openId:loginStore.openId})
         .send();
     emit('close');
 };
