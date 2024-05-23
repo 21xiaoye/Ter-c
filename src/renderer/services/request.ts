@@ -1,12 +1,14 @@
 import { createAlova } from "alova";
 import vueHook from "alova/vue";
 import GlobalFetch from "alova/GlobalFetch";
-
+import { ElMessage } from 'element-plus'
 function getToken(){
   let tempToken = ''
   return {
     get() {
-      if (tempToken) return tempToken
+      if (tempToken) {
+        this.clear();
+      }
       const token = localStorage.getItem('TOKEN')
       if (token) {
         tempToken = token
@@ -25,7 +27,10 @@ export const alovaIns = createAlova({
     statesHook: vueHook,
     requestAdapter: GlobalFetch(),
     beforeRequest({config}){
-            //  config.headers.Authorization = `Bearer ${computedToken.get()}`;
+        if(computedToken.get()!== ''){
+          config.headers.Authorization = `Bearer ${computedToken.get()}`; 
+        }
+      
         config.headers['Content-Type'] = 'application/json; charset=utf-8';
     },
 
@@ -38,7 +43,7 @@ export const alovaIns = createAlova({
         if (!computedToken.get() && response.status === 401) {
           //
         } else {
-            console.error(json.errMsg);
+            ElMessage.error(json.errMsg)
         }
         throw new Error(json.errMsg)
       } else {

@@ -1,3 +1,4 @@
+import { UserInfoType } from "../services/types"
 export enum WsResponseMessageType {
     LoginQrCode = 1, // 获取登录二维码
     WaitingAuthorize, // 扫码成功，等待授权
@@ -26,6 +27,10 @@ export type WsReqMsgContentType = {
 
 export type LoginInitResType = { loginUrl: string }
 export type emailBindingResType = {openId : string}
+export type LoginSuccessResType = {
+  /** 用户的登录凭证，每次请求携带 */
+  token: string
+}
 
 // export type EmailBindingResType = { loginCode:  }
 

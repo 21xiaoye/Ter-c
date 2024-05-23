@@ -52,4 +52,8 @@ ipcMain.on('create-login-register-window',()=>{
   }
 })
 
+ipcMain.on('close-login-register-window',()=>{
+  loginRegisterWindow?.close();
+})
+
 

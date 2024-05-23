@@ -4,6 +4,7 @@
 export default interface ElectronApi {
   sendMessage: (message: string) => void
   createLoginAndRegisterWindow :() => void
+  closeLoginAndRegisterWinwod:()=> void
 }
 
 declare global {
