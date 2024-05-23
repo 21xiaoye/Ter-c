@@ -3,7 +3,7 @@
  */
 export default interface ElectronApi {
   sendMessage: (message: string) => void
-  createLoginAndRegisterWindow :() => void
+  createWindow :() => void
   closeLoginAndRegisterWinwod:()=> void
 }
 

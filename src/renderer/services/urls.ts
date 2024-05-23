@@ -6,5 +6,6 @@ export default{
     userLogin:`${prefix}/api/common/login`,
     userRegister:`${prefix}/api/common/register`,
     
-    updateAvatar:`${prefix}/api/user/avatar`
+    updateAvatar:`${prefix}/api/user/avatar`,
+    getUserInfoDetail: `${prefix}/api/user/userInfo`, // 获取用户信息详情
 }

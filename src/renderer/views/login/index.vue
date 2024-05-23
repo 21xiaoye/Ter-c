@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { LoginSuccessResType } from '../../util/wsType'
-import { ElMessage } from 'element-plus'
 import {ref} from 'vue'
 import { swichRouter } from '../../main';
 import { useWsLoginStore } from '../../stores/ws';
@@ -16,11 +14,9 @@ const switchRouter = (path:string)=>{
     swichRouter(path);
 }
 const handleSubmit = async ()=>{
-    const data = await apis
+    await apis
         .userLogin({ userEmail: email.value, userPasswd: passwd.value, rememberMe:rememberMe.value}) 
         .send();
-    const { token, ...rest } = data;
-    localStorage.setItem("TOKEN", token);
     window.electronAPI.closeLoginAndRegisterWinwod();
 }
 

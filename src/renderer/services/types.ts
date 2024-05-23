@@ -20,8 +20,4 @@ export type UserInfoType = {
   avatar: string
   /** 用户名 */
   name: string
-  /** 性别 1为男性，2为女性 */
-  sex: SexEnum
-  /** 权限 */
-  power?: number
 }

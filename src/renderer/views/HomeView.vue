@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
+import { useUserStore } from '../../renderer/stores/user'
 import { ref } from 'vue';
+
+const userStore = useUserStore();
 interface SidebarItem {
     label: string;
     icon: string;
@@ -23,9 +26,7 @@ const setActive = (selectedItem:SidebarItem) =>{
     });
 }
 
-const login = ()=>{
-    window.electronAPI.createLoginAndRegisterWindow();
-}
+
 </script>
 
 
@@ -33,9 +34,9 @@ const login = ()=>{
     <main class="ter-main">
         <div class="ter-app">
             <div id="items" class=" sidebar-container" v-if="!$route.meta.hideSidebar">
-                <div class="style-scope ter-mini-guide-renderer sidebar-item" @click="login()">
+                <div class="style-scope ter-mini-guide-renderer sidebar-item">
                     <a href="#">
-                        <img src="/personal.svg" alt="首页" class="icon">
+                        <img :src="userStore.userInfo.avatar" class="icon">
                     </a>
                 </div>
                 <div v-for="item in items" :key="item.label" class="sidebar-item" :class="{ active: item.active }"

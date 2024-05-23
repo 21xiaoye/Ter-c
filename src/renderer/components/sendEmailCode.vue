@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { defineProps, toRefs, ref } from 'vue';
 import { useWsLoginStore, } from '../stores/ws';
+import { ElMessage } from 'element-plus';
 const loginStore = useWsLoginStore();
 import apis from '../services/apis'
-
 
 const props = defineProps({
     open: {
@@ -13,28 +13,37 @@ const props = defineProps({
 });
 
 const { open } = toRefs(props);
+const loading = ref<boolean>(false);
 const email = ref('');
 const emit = defineEmits(['close']);
 
 const handleSubmit = async () => {
     loginStore.email = email.value;
-    console.log(loginStore.email);
-    
+    loading.value = true;
     await apis
         .sendEmailCode({email:email.value, openId:loginStore.openId})
-        .send();
+        .send()
+        .then(()=>{
+            ElMessage({
+                message: "验证码已发送",
+                type: 'success',
+            })
+            loading.value = false;
+        });
+        
     emit('close');
 };
 </script>
 
 <template>
-    <div class="form-container" v-if="open">  
+    <div class="form-container" v-if="open">
         <div class="form">
             <div class="form-group">
                 <label for="email">邮箱</label>
                 <input type="email" id="email" name="email" placeholder="输入你的电子邮箱" required v-model="email">
             </div>
-            <button class="form-submit-btn" @click="handleSubmit">发送电子邮件</button>
+            <button class="form-submit-btn" @click="handleSubmit">{{ loading ? " 发送中..." : "获取验证码"
+                }}</button>
         </div>
     </div>
 </template>

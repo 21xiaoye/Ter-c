@@ -2,13 +2,15 @@ import {
     LoginInitResType,
     WsReqMsgContentType,
     WsResponseMessageType,
-    emailBindingResType
+    emailBindingResType,
+    LoginSuccessResType
 } from './wsType';
 
 
 import { useUserStore } from '../stores/user'
-import shakeTitle from './shakeTitle'
+import shakeTitle from './shakeTitle';
 import { worker } from './initWorker';
+import { computedToken } from '../services/request'
 import { useWsLoginStore,LoginStatus } from '../stores/ws';
 
 
@@ -39,7 +41,7 @@ class WS{
         worker.postMessage(`{"type":"initWS", "value":${token ? `"${token}"`: null}}`)
     }
 
-    onMessage = (value: string)=>{
+    onMessage = (value: string)=>{  
         const params:{type:WsResponseMessageType; data:unknown} = JSON.parse(value);
         const loginStore = useWsLoginStore();
         const userStore = useUserStore()
@@ -62,10 +64,24 @@ class WS{
                 loginStore.loginStatus = LoginStatus.Binding;
                 break;
             }
-            case WsResponseMessageType.LoginSuccess:{
+            case WsResponseMessageType.LoginSuccess:{     
+                const {token,...rest} = params.data as LoginSuccessResType;
+                userStore.userInfo = { ...userStore.userInfo, ...rest}
+                localStorage.setItem('USER_INFO', JSON.stringify(rest));
+                localStorage.setItem('TOKEN', token);
+
+                computedToken.clear();
+                computedToken.get();
+                
                 userStore.isSign = true
                 loginStore.loginStatus = LoginStatus.Success;
                 loginStore.showLogin = false
+                loginStore.loginQrCode = undefined;
+                
+                // 关闭登录窗口，打开主窗口
+                window.electronAPI.closeLoginAndRegisterWinwod();
+                window.electronAPI.createWindow();
+                
                 break;
             }
         }

@@ -1,24 +1,37 @@
-import {ref} from 'vue'
+import { ref } from 'vue'
+import apis from '../services/apis'
 import { defineStore } from 'pinia'
-import { UserInfoType } from '../services/types';
-export const useUserStore = defineStore('user',()=>{
-    const userInfo = ref<Partial<UserInfoType>>({});
-    const isSign = ref(false);
+import type { UserInfoType } from '../services/types.ts'
 
-    let localUserInfo = {}
-    try{
-        localUserInfo = JSON.parse(localStorage.getItem('USER_INFO')|| '{}')
-    }catch(error){
-        localUserInfo = {}
-    }
+export const useUserStore = defineStore('user', () => {
+  const userInfo = ref<Partial<UserInfoType>>({})
+  const isSign = ref(false)
 
-    if(!Object.keys(userInfo.value).length && Object.keys(localUserInfo).length){
-        userInfo.value = localUserInfo;
-    }
+  let localUserInfo = {}
+  try {
+    localUserInfo = JSON.parse(localStorage.getItem('USER_INFO') || '{}')
+  } catch (error) {
+    localUserInfo = {}
+  }
 
-    function getUserDetailAction(){
-        console.log('发送请求获取用户详细信息');
-    }
+  // 从 local读取
+  if (!Object.keys(userInfo.value).length && Object.keys(localUserInfo).length) {
+    userInfo.value = localUserInfo
+  }
 
-    return {userInfo, isSign, getUserDetailAction}
+  function getUserDetailAction() {
+    apis
+      .getUserDetail()
+      .send()
+      .then((data) => {
+        userInfo.value = { ...userInfo.value, ...data }
+      })
+      .catch(() => {
+        // 删除缓存
+        localStorage.removeItem('TOKEN')
+        localStorage.removeItem('USER_INFO')
+      })
+  }
+
+  return { userInfo, isSign, getUserDetailAction }
 })

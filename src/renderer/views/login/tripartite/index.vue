@@ -10,6 +10,8 @@ const loginQrCode = computed(() => loginStore.loginQrCode);
 const loginStatus = computed(() => loginStore.loginStatus);
 const isShow = ref(true);
 
+
+
 /**
  * 关闭微信登录窗口，返回到登录页面
  */
@@ -55,7 +57,8 @@ watchEffect(() => {
                 <span class="mainHeading">第三方登录</span>
                 <p class="otpSubheading">使用微信扫码关注公众号完成登录</p>
                 <div class="inputContainer">
-                    <div style="width:328px;height: 328px;" v-if="loginStatus !== LoginStatus.Binding">
+                    <div style="height: 328px;width: 328px;" v-loading="!loginQrCode" element-loading-text="Loading..."
+                        v-if="loginStatus !== LoginStatus.Binding">
                         <Qrcode class="login-qrcode" v-if="loginQrCode" :value="loginQrCode" :size="328" :margin="5" />
                     </div>
                     <div v-if="loginStatus === LoginStatus.Binding" class="form-container">
@@ -70,10 +73,15 @@ watchEffect(() => {
                     扫码成功~,"绑定邮箱"完成登录
                 </p>
                 <p class="login-desc" v-if="loginStatus === LoginStatus.Waiting">
-                    扫码成功~，点击“登录”继续登录
+                    扫码成功~，点击“授权”继续登录
                 </p>
                 <button class="exitBtn" @click="tripartiteClose">×</button>
-                <p class="resendNote">验证码失效?<button class="resendBtn" @click="resetQrCode">重新获取</button></p>
+                <p class="resendNote" v-if="loginStatus !== LoginStatus.Binding">
+                    验证码失效?
+                    <button class="resendBtn" @click="resetQrCode">
+                        重新获取
+                    </button>
+                </p>
             </div>
         </div>
     </div>

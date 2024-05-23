@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { defineProps, toRefs, ref } from 'vue';
 import { useWsLoginStore, } from '../stores/ws';
+
 import apis from '../services/apis'
 const loginStore = useWsLoginStore();
+
 const code = ref('');
+const loading = ref<boolean>(false);
 const props = defineProps({
     open: {
         type: Boolean,
@@ -19,26 +22,29 @@ const close = () => {
     emit('close');
 };
 const handleSubmit = async ()=>{
+    loading.value = true;
     await apis.
-        emailBinding({ email: loginStore.email, openId: loginStore.openId, code:"YYQY73"})
-        .send();
+        emailBinding({ 
+            email: loginStore.email, 
+            openId: loginStore.openId, 
+            code:code.value
+        })
+        .send()
+        .then(()=>{
+            loading.value = false;
+        });
     close();
 }
 </script>
 
 <template>
-    <div class="otp-Form" v-if="open">
+    <div class="otp-Form" v-if="open" v-loading="loading" element-loading-text="登陆中...">
         <span class="mainHeading">一次性验证码</span>
         <p class="otpSubheading">我们已将验证码发送至您的邮箱</p>
         <div class="inputContainer">
-            <input required maxlength="1" type="text" class="otp-input" id="otp-input1" v-model="code">
-            <input required maxlength="1" type="text" class="otp-input" id="otp-input2">
-            <input required maxlength="1" type="text" class="otp-input" id="otp-input3">
-            <input required maxlength="1" type="text" class="otp-input" id="otp-input4">
-            <input required maxlength="1" type="text" class="otp-input" id="otp-input5">
-            <input required maxlength="1" type="text" class="otp-input" id="otp-input6">
+            <input required maxlength="8" type="text" class="otp-input" id="otp-input1" v-model="code">
         </div>
-        <button class="verifyButton" type="submit" @click="handleSubmit">验证</button>
+        <button class="verifyButton" type="submit" @click="handleSubmit"> 验证</button>
         <button class="exitBtn" @click="close">×</button>
         <p class="resendNote">没有收到验证码?<button class="resendBtn">重新发送</button></p>
     </div>
@@ -85,7 +91,7 @@ const handleSubmit = async ()=>{
 
 .otp-input {
     background-color: rgb(228, 228, 228);
-    width: 30px;
+    width: 100%;
     height: 30px;
     text-align: center;
     border: none;
