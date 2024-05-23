@@ -1,5 +1,11 @@
+<script setup lang="ts">
+import chatPage from './chatPage/index.vue';
+import chatList from './chatList/index.vue';
+</script>
+
 <template>
     <div>
-        聊天页面
+        <chatList/>
+        <chatPage/> 
     </div>
 </template>

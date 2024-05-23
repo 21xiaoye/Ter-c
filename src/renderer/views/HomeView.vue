@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-import { useUserStore } from '../../renderer/stores/user'
+import { useUserStore } from "../../renderer/stores/user"
 import { ref } from 'vue';
-
-const userStore = useUserStore();
 interface SidebarItem {
     label: string;
     icon: string;
@@ -11,21 +9,24 @@ interface SidebarItem {
     path:string,
 }
 
+const userStore = useUserStore();
+
 const items = ref<SidebarItem[]>([
-    { label: '首页', icon: '/home.svg', active: false ,path:'/'},
+    { label: '首页', icon: '/home.svg', active: true ,path:'/'},
     { label: '聊天', icon: '/chat.svg', active: false, path:'/chat' },
     { label: '设置', icon: '/set-up.svg', active: false, path:'/set-up'}
 ]);
 
-const setActive = (selectedItem:SidebarItem) =>{
-    items.value.forEach(item => { 
-        item.active = item === selectedItem;
-        if (item.active) {
-            window.electronAPI.sendMessage(item.path);
-        }
-    });
-}
-
+const setActive = (selectedItem: SidebarItem) => {
+    // 只在点击的项目与当前active项目不同的时候才更新active状态
+    if (!selectedItem.active) {
+        items.value.forEach(item => {
+            item.active = false;
+        });
+        selectedItem.active = true;
+        window.electronAPI.sendMessage(selectedItem.path);
+    }
+};
 
 </script>
 
@@ -33,10 +34,10 @@ const setActive = (selectedItem:SidebarItem) =>{
 <template>
     <main class="ter-main">
         <div class="ter-app">
-            <div id="items" class=" sidebar-container" v-if="!$route.meta.hideSidebar">
-                <div class="style-scope ter-mini-guide-renderer sidebar-item">
+            <div id="items" class="sidebar-container" v-if="!$route.meta.hideSidebar">
+                <div class="style-scope  sidebar-item">
                     <a href="#">
-                        <img :src="userStore.userInfo.avatar" class="icon">
+                        <img :src="userStore.userInfo.avatar" class="avatar">
                     </a>
                 </div>
                 <div v-for="item in items" :key="item.label" class="sidebar-item" :class="{ active: item.active }"
@@ -63,6 +64,7 @@ const setActive = (selectedItem:SidebarItem) =>{
     .ter-app{
         display: flex;
         .sidebar-container {
+            background-color: black;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -78,6 +80,10 @@ const setActive = (selectedItem:SidebarItem) =>{
                 height: 50px;
                 text-decoration: none;
                 color: black;
+                .avatar{
+                    width: 40px;
+                    height: 40px;
+                }
                 .icon {
                     width: 30px;
                     height: 30px;
@@ -87,7 +93,7 @@ const setActive = (selectedItem:SidebarItem) =>{
                 }
             }
             .active {
-                background-color: red;
+                background-color: white;
             }
         }
     }

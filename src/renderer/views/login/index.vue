@@ -9,6 +9,7 @@ const email = ref<string>('');
 const passwd = ref<string>('');
 const rememberMe = ref<boolean>(false);
 
+
 const switchRouter = (path:string)=>{
     loginStore.showLogin = true;
     swichRouter(path);
