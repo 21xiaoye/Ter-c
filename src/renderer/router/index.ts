@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
 import createGuard from './guard';
 
-const HomeView = () => import('../views/home/index.vue');
+const ContactsView = () => import('../views/contacts/index.vue');
 const HomeChatView = () => import('../views/chat/index.vue');
 const LoginView = () => import('../views/login/index.vue');
 const RegisterView = () => import('../views/register/index.vue');
@@ -10,14 +10,13 @@ const ForGotPassWDView = () => import('../views/forgot/index.vue');
 const TripartiteView = () => import('../views/login/tripartite/index.vue');
 
 
-
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView,
+      path: '/contacts',
+      name: 'contacts',
+      component: ContactsView,
     },
     {
       path:'/chat',
@@ -55,7 +54,7 @@ const router = createRouter({
     },
     {
       path: '/:pathMatch(.*)*',
-      redirect: '/',
+      redirect: '/chat',
     }
   ],
 });

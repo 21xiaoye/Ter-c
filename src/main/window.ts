@@ -1,4 +1,4 @@
-import { BrowserWindow,  app} from "electron";
+import { BrowserWindow,  app, ipcMain} from "electron";
 
 export let loginRegisterWindow : BrowserWindow | null = null;
 export let mainWindow : BrowserWindow | null = null;
@@ -11,6 +11,8 @@ export function createWindow () {
     height: 600,
     minWidth:700,
     minHeight:525,
+    icon: path.join(__dirname, 'static/favicon.ico'),
+    frame:false,
     webPreferences: {
       preload: join(__dirname, 'preload.js'),
       nodeIntegration: false,
@@ -28,21 +30,32 @@ export function createWindow () {
   else {
     mainWindow.loadFile(join(app.getAppPath(), 'renderer', 'index.html'));
   }
-}
 
+  mainWindow.on('close', (event) => {
+    mainWindow?.hide();
+    mainWindow?.setSkipTaskbar(true);
+    event.preventDefault();
+  });
+}
 export function createdLoginRegisterWindow(){
   loginRegisterWindow = new BrowserWindow({
     width: 800,
     height: 600,
     minWidth:800,
     minHeight:600,
-    // frame:false,
+    icon: path.join(__dirname, 'static/favicon.ico'),
+    title:"cw",
+    frame:false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'), 
       nodeIntegration: false,
       contextIsolation: true
     }
   });
+  
+  loginRegisterWindow.on('close',()=>{
+    loginRegisterWindow = null;
+  })
 
   loginRegisterWindow.removeMenu();
   if (process.env.NODE_ENV === 'development') { 

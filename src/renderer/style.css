@@ -10,6 +10,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
 }
 
 :root {
@@ -212,3 +213,17 @@
   --graph_icon: var(--Ga7);
   --shadow: var(--Ba0);
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+::-webkit-scrollbar-track {
+  display: none;
+}
+
+::scrollbar-track {
+  display: none;
+}
+

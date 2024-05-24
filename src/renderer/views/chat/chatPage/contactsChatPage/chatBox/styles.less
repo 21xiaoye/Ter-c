@@ -1,0 +1,106 @@
+.chat-edit{
+    .chat-tools{
+        height: 30px;
+        display: flex;
+        width: 100%;
+        .tools-left{
+            justify-content: start;
+            flex: 1;
+        }
+        .icon{
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .icon:hover{
+            background-color: var(--Ga2_u);
+        }
+    }
+}
+
+.emoji-panel{
+    display: flex;
+    flex-direction: column; 
+    .emoji-panel-content{
+        height: 250px;
+        overflow: auto;
+        .emoji-panel-title{
+            padding: 10px;
+        }
+        .item {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin: 7px;
+            cursor: pointer;
+            border-radius: 6px;
+    
+            .del {
+                position: absolute;
+                top: 0;
+                right: 2px;
+                font-weight: 500;
+                color: #f54e4e;
+                cursor: pointer;
+                display: none;
+            }
+            
+
+            img {
+                width: 100%;
+                height: 100%;
+                vertical-align: bottom;
+                border-radius: 2px;
+            }
+    
+            &:hover {
+                box-shadow: var(--el-box-shadow-light);
+                .del{
+                    display: block;
+                }
+            }
+        }
+        .item-add{
+            border: 1px solid var(--Ga1_u);
+        }
+    }
+    .footer {
+        display: flex;
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        margin-top: 4px;
+        width: 100%;
+        border-top: 1px solid var(--Ga2_u);
+        .icon{
+            width: 30px;
+            height: 30px;
+            transition: 0.2s;
+        }
+        .icon:hover{
+            background-color: var(--Ga2_u);
+        }
+        .active {
+            background-color: var(--Ga2_u);
+        }
+    }
+}
+
+.emoji-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    word-wrap: break-word;
+    list-style-type: none;
+    .emoji-item{
+        padding: 5px;
+        transition: 0.2s;
+        font-size: 20px;
+        cursor: pointer;
+    }
+    .emoji-item:hover{
+        background-color: var(--Ga2_u);
+    }
+}

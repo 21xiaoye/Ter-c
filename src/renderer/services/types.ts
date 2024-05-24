@@ -21,3 +21,8 @@ export type UserInfoType = {
   /** 用户名 */
   name: string
 }
+
+export type EmojiItem = {
+  expressionUrl: string
+  id: number
+}

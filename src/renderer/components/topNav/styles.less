@@ -1,0 +1,41 @@
+.card {
+    width: calc(100vw - 50px);
+    min-height: 25px;
+    background: var(--Ga1_u);
+    border-bottom: 1px solid var(--Ga2_u);
+
+    .titlebar {
+        background-color: var(--Ga1_u);
+        width: 100%;
+        text-align: right;
+    }
+}
+
+.card button {
+    width: 30px;
+    height: 25px;
+    margin-right: 5px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    transition: 0.2s;
+}
+
+.card button:not(:last-child) {
+    margin-right: 16px;
+}
+
+button svg path,
+button svg rect,
+button svg polygon {
+    fill: var(--Ga8_u);
+}
+
+button svg {
+    width: 10px;
+    height: 10px;
+}
+
+.icon:hover {
+    background-color: var(--Ga2_u);
+}

@@ -38,5 +38,5 @@ const handleSubmit = () => {
 </template>
 
 
-<style lang="less" src="./forgot.less" scoped>
+<style lang="less" src="./styles.less" scoped>
 </style>

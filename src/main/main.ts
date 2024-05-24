@@ -1,5 +1,6 @@
 import {app, BrowserWindow, ipcMain, session} from 'electron';
 import { createdLoginRegisterWindow ,loginRegisterWindow,createWindow,mainWindow} from './window';
+import { createTray } from './tary'
 const path = require('path');
 
 
@@ -19,6 +20,8 @@ app.whenReady().then(() => {
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) {
       createdLoginRegisterWindow();
+    }else{
+      mainWindow?.setSkipTaskbar(false)
     }
   });
 });
@@ -41,6 +44,7 @@ ipcMain.on('message', (event, message) => {
 })
 
 ipcMain.on('create-main-window',()=>{
+  createTray();
   createWindow();
   // if(process.env.NODE_ENV === 'development'){
   //   const rendererPort = process.argv[2];
@@ -55,4 +59,38 @@ ipcMain.on('close-login-register-window',()=>{
   loginRegisterWindow?.close();
 })
 
+ipcMain.on('minimize-window', () => {
+  if(mainWindow){
+    mainWindow?.minimize();
+  }
+  if(loginRegisterWindow){
+    loginRegisterWindow?.minimize();
+  }
+});
 
+ipcMain.on('maximize-window', () => {
+  if(mainWindow){
+    mainWindow?.maximize();
+  }
+  if(loginRegisterWindow){
+    loginRegisterWindow?.maximize();
+  }
+});
+
+ipcMain.on('close-window', () => {
+    if(mainWindow){
+    mainWindow?.close();
+  }
+  if(loginRegisterWindow){
+    loginRegisterWindow?.close();
+  }
+});
+
+ipcMain.on('unmaximize-window',()=>{
+  if(mainWindow){
+    mainWindow?.unmaximize();
+  }
+  if(loginRegisterWindow){
+    loginRegisterWindow?.unmaximize();
+  }
+})
