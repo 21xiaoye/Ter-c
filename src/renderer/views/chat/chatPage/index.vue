@@ -1,6 +1,15 @@
 <script setup lang="ts">
 import contactsChatPage from './contactsChatPage/index.vue'
 import searchComponents from '../../../components/searchComponents/index.vue'
+import { computed } from 'vue';
+import { useChatStore } from '../../../stores/chat';
+
+const useStore = useChatStore();
+const cardIndex = computed(() => useStore.chatIndex);
+
+const count = (index:number)=>{
+    useStore.chatIndex = index;    
+}
 </script>
 <template>
     <div style="display: flex;">
@@ -15,19 +24,23 @@ import searchComponents from '../../../components/searchComponents/index.vue'
                     </button>
                 </div>
             </div>
+
             <div class="ter-chat-list">
-                <div class="card" v-for="index in 6" :key="index">
-                    <a class="card1" href="#">
-                        <p>This is heading</p>
-                        <p class="small">Card description with lots of great facts and interesting details.</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                →
-                            </div>
+                <div class="card" v-for="index in 30" :key="index" :class="{ 'active': index === cardIndex }"
+                    @click="count(index)">
+                    <div class="img"></div>
+                    <div class="textBox">
+                        <div class="textContent">
+                            <p class="h1">Clans of Clash</p>
+                            <span class="span">19:14</span>
                         </div>
-                    </a>
+                        <div class="textContent msgContent">
+                            <span class="h2 span">你现在在干嘛呢?1111111111111111111</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
 
         <div class="ter-chatPage">

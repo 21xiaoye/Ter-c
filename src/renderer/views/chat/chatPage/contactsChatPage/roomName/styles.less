@@ -3,30 +3,30 @@
     min-height: 60px;
     background: var(--Ga1_u);
     border-bottom: 1px solid var(--Ga2_u);
-    .titlebar {
-        background-color: var(--Ga1_u);
-        width: 100%;
-        text-align: right;
-    }
+    display: flex;
+    align-items: center;
     .room-name{
         padding-left: 20px;
+        flex: 1;
         font-size: 20px;
         font-weight: 500;
-        
     }
-}
-
-.card button {
-    width: 30px;
-    height: 25px;
-    border: 0;
-    outline: 0;
-    background: transparent;
-    transition: 0.2s;
-}
-
-.icon:hover {
-    background-color: var(--Ga2_u);
+    .edit {
+        background-color: var(--Ga1_u);
+        .icon {
+            width: 25px;
+            height: 25px;
+            border: 0;
+            outline: 0;
+            background: transparent;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+    
+        .icon:hover {
+            background-color: var(--Ga2_u);
+        }
+    }
 }
 
 

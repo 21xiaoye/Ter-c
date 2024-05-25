@@ -60,7 +60,7 @@
   --v_stress_red: var(--stress_red, #F85A54);
   --v_stress_red_thin: var(--stress_red_thin, #FEECEA);
   --v_success_green: var(--success_green, #2AC864);
-  --v_success_green_thin: var(--success_green_thin, #E4F8EA);
+  --v_success_green_thin: var(--success_green_thin, #32ea69);
   --v_operate_orange: var(--operate_orange, #FF7F24);
   --v_operate_orange_thin: var(--operate_orange_thin, #FFF0E3);
   --v_pay_yellow: var(--pay_yellow, #FFB027);
