@@ -5,7 +5,7 @@ const path = require('path');
 
 
 app.whenReady().then(() => {
-  createdLoginRegisterWindow();
+  createWindow();
   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
     callback({
       responseHeaders: {
@@ -78,7 +78,7 @@ ipcMain.on('maximize-window', () => {
 });
 
 ipcMain.on('close-window', () => {
-    if(mainWindow){
+  if(mainWindow){
     mainWindow?.close();
   }
   if(loginRegisterWindow){

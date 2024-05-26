@@ -14,9 +14,6 @@ const useStore = useUserStore();
                     </div>
                     <div class="Name">
                         {{ useStore.userInfo.name }}
-                        <span>
-                            uid: 123456789
-                        </span>
                     </div>
                     <div class="Roles">
                         <span>
@@ -26,12 +23,13 @@ const useStore = useUserStore();
                         </span>
                         <span>
                             <el-icon>
-                                <MoreFilled />
+                                <Star />
                             </el-icon>
                         </span>
                     </div>
                     <div class="Descripion">
-                        鲜衣怒马少年时，一日看尽长安花
+                        <span>uid:<i>123456789</i></span>
+                        <span>地区:<i>长沙</i></span>
                     </div>
                 </div>
             </div>

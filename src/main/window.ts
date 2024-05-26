@@ -9,7 +9,7 @@ export function createWindow () {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    minWidth:700,
+    minWidth:800,
     minHeight:525,
     icon: path.join(__dirname, 'static/favicon.ico'),
     frame:false,

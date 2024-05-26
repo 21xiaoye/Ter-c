@@ -1,9 +1,9 @@
 {
-  root: 'D:\\YE\\node\\electron-vue-template',
+  root: 'D:\\YE\\src\\vue\\Ter-c',
   registry: 'https://registry.npmmirror.com',
   pkgs: [
     {
-      name: 'Alova',
+      name: '@types/imengyu__vue3-context-menu',
       version: 'latest',
       type: 'tag',
       alias: undefined,
@@ -15,7 +15,7 @@
   cacheDir: 'C:\\Users\\34746\\.npminstall_tarball',
   env: {
     npm_config_registry: 'https://registry.npmmirror.com',
-    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\34746\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","Alova"],"original":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\34746\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","Alova"]}',
+    npm_config_argv: '{"remain":[],"cooked":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\34746\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","--save-dev","@types/imengyu__vue3-context-menu"],"original":["--fix-bug-versions","--china","--userconfig=C:\\\\Users\\\\34746\\\\.cnpmrc","--disturl=https://cdn.npmmirror.com/binaries/node","--registry=https://registry.npmmirror.com","--save-dev","@types/imengyu__vue3-context-menu"]}',
     npm_config_user_agent: 'npminstall/7.11.1 npm/? node/v18.20.0 win32 x64',
     npm_config_cache: 'C:\\Users\\34746\\.npminstall_tarball',
     NODE: 'C:\\Program Files\\nodejs\\node.exe',
@@ -50,8 +50,8 @@
     npm_config_sharp_binary_host: 'https://cdn.npmmirror.com/binaries/sharp',
     npm_config_sharp_libvips_binary_host: 'https://cdn.npmmirror.com/binaries/sharp-libvips',
     npm_config_robotjs_binary_host: 'https://cdn.npmmirror.com/binaries/robotjs',
-    npm_rootpath: 'D:\\YE\\node\\electron-vue-template',
-    INIT_CWD: 'D:\\YE\\node\\electron-vue-template'
+    npm_rootpath: 'D:\\YE\\src\\vue\\Ter-c',
+    INIT_CWD: 'D:\\YE\\src\\vue\\Ter-c'
   },
   binaryMirrors: {
     ENVS: {
@@ -187,7 +187,7 @@
   disableFallbackStore: false,
   workspacesMap: Map(0) {},
   enableWorkspace: false,
-  workspaceRoot: 'D:\\YE\\node\\electron-vue-template',
+  workspaceRoot: 'D:\\YE\\src\\vue\\Ter-c',
   isWorkspaceRoot: true,
   isWorkspacePackage: false,
   offline: false,

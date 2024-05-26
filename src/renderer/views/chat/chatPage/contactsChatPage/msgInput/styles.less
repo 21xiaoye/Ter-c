@@ -19,19 +19,60 @@
     }
     .msg-btn{
         right: 0;
+        bottom: -20px;
         position: absolute;
-        button{
-            border: 1px solid var(--Ga2_u);
-            width: 100px;
-            background-color: var(--Ga2_u);
+        button {
+            font-family: inherit;
+            font-size: 16x;
+            background: linear-gradient(to bottom, #4dc7d9 0%, #66a6ff 100%);
+            color: white;
+            padding: 0.2em 0.4em;
+            display: flex;
             cursor: pointer;
-            line-height: 1.5em;
-            color: var(--v_success_green);
+            align-items: center;
+            justify-content: center;
+            border: none;
             border-radius: 5px;
-            transition: 0.2s;
-            &:hover{
-                background-color: var(--Ga3_u);
-            }
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        button:active {
+            transform: scale(0.95);
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        button span {
+            display: block;
+            margin-left: 0.4em;
+            transition: all 0.3s;
+        }
+
+        button svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+            transition: all 0.3s;
+        }
+
+        button .svg-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            margin-right: 0.5em;
+            transition: all 0.3s;
+        }
+
+        button:hover .svg-wrapper {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        button:hover svg {
+            transform: rotate(45deg);
         }
     }
 }

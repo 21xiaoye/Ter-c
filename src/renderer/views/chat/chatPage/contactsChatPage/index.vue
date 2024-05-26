@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import RoomName from './roomName/index.vue'
 import chatBox from './chatBox/index.vue'
+import chatList from './chatList/index.vue'
 </script>
 <template>
     <div class="ter-chat">
@@ -9,9 +10,7 @@ import chatBox from './chatBox/index.vue'
             <RoomName />
         </div>
         <div class="chat-list">
-            <div v-for="index in 1000" :key="index">
-                消息
-            </div>
+           <chatList/>
         </div>
         <div class="chat-message">
             <chatBox/>
