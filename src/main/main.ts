@@ -1,11 +1,12 @@
 import {app, BrowserWindow, ipcMain, session} from 'electron';
-import { createdLoginRegisterWindow ,loginRegisterWindow,createWindow,mainWindow} from './window';
+import { createWindow,mainWindow} from './window';
 import { createTray } from './tary'
 const path = require('path');
 
 
 app.whenReady().then(() => {
   createWindow();
+  createTray();
   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
     callback({
       responseHeaders: {
@@ -19,7 +20,7 @@ app.whenReady().then(() => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) {
-      createdLoginRegisterWindow();
+      createWindow();
     }else{
       mainWindow?.setSkipTaskbar(false)
     }
@@ -55,16 +56,11 @@ ipcMain.on('create-main-window',()=>{
   // }
 })
 
-ipcMain.on('close-login-register-window',()=>{
-  loginRegisterWindow?.close();
-})
+
 
 ipcMain.on('minimize-window', () => {
   if(mainWindow){
     mainWindow?.minimize();
-  }
-  if(loginRegisterWindow){
-    loginRegisterWindow?.minimize();
   }
 });
 
@@ -72,25 +68,16 @@ ipcMain.on('maximize-window', () => {
   if(mainWindow){
     mainWindow?.maximize();
   }
-  if(loginRegisterWindow){
-    loginRegisterWindow?.maximize();
-  }
 });
 
 ipcMain.on('close-window', () => {
   if(mainWindow){
     mainWindow?.close();
   }
-  if(loginRegisterWindow){
-    loginRegisterWindow?.close();
-  }
 });
 
 ipcMain.on('unmaximize-window',()=>{
   if(mainWindow){
     mainWindow?.unmaximize();
-  }
-  if(loginRegisterWindow){
-    loginRegisterWindow?.unmaximize();
   }
 })

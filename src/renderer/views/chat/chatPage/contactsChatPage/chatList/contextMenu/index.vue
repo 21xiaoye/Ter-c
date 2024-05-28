@@ -13,17 +13,17 @@ const props = defineProps<{
     options?: MenuOptions
 }>()
 
-const menuOptions = ref({
-    theme: 'dark',
-    x: 0,
-    y: 0,
-    ...props.options,
-});
 </script>
 
 
 <template>
-    <ContextMenu :options="menuOptions">
+    <ContextMenu :options="{
+        theme: 'dark',
+        x: 0,
+        y: 0,
+        ...props.options,
+    }">
+        
     </ContextMenu>
 </template>
 

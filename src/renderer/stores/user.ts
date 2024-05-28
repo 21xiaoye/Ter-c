@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import apis from '../services/apis'
 import { defineStore } from 'pinia'
-import type { UserInfoType } from '../services/types.ts'
+import type { UserInfoType } from '../services/types'
 
 export const useUserStore = defineStore('user', () => {
   const userInfo = ref<Partial<UserInfoType>>({})
@@ -19,6 +19,12 @@ export const useUserStore = defineStore('user', () => {
     userInfo.value = localUserInfo
   }
 
+  function outLogin(){
+    localStorage.clear();
+    userInfo.value = {};
+    isSign.value = false;
+  }
+
   function getUserDetailAction() {
     apis
       .getUserDetail()
@@ -33,5 +39,5 @@ export const useUserStore = defineStore('user', () => {
       })
   }
 
-  return { userInfo, isSign, getUserDetailAction }
+  return { userInfo, isSign, getUserDetailAction ,outLogin}
 })

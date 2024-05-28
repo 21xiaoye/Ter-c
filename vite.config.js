@@ -1,6 +1,5 @@
 const Path = require('path');
 const vuePlugin = require('@vitejs/plugin-vue')
-import vueJsx from '@vitejs/plugin-vue-jsx'
 const { defineConfig } = require('vite');
 
 const config = defineConfig({
@@ -16,7 +15,6 @@ const config = defineConfig({
     },
     plugins: [
         vuePlugin(),
-        vueJsx(),
     ],
 });
 

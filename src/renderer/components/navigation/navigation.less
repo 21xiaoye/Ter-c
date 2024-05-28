@@ -2,9 +2,10 @@
     width: 50px;
     height: 100vh;
     -webkit-app-region: drag;
+    position: relative;
 }
 .sidebar-container {
-    background-color: black;
+    background-color: var(--Ga3);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,8 +17,11 @@
     .sidebar-item{
         -webkit-app-region: no-drag;
         cursor: pointer;
+        transition: 0.2s all;
+        .icon{
+            transition: 0.2s all;
+        }
     }
-
     .sidebar-item a {
         display: flex;
         flex-direction: column;
@@ -31,5 +35,36 @@
             width: 40px;
             height: 40px;
         }
+    }
+}
+.buttom{
+    color: white;
+    position: absolute;
+    width: 50px;
+    bottom: 0;
+    text-align: center;
+}
+.sidebar-item:hover{
+    color: var(--v_brand_blue);
+    .icon{
+        color: var(--v_brand_blue);
+        font-size: 30px;
+    }
+}
+
+.edit{
+    .edit-item{
+        width: 100%;
+        padding: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        span{
+            line-height: 20px;
+            padding-left: 5px;
+        }
+    }
+    .edit-item:hover{
+        color: var(--v_brand_blue);
     }
 }

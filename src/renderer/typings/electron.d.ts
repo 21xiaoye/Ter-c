@@ -3,8 +3,6 @@
  */
 export default interface ElectronApi {
   sendMessage: (message: string) => void
-  createWindow :() => void
-  closeLoginAndRegisterWinwod:()=> void
 
   minimize: () => void 
   maximize: () => void

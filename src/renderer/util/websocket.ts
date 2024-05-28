@@ -12,6 +12,7 @@ import shakeTitle from './shakeTitle';
 import { worker } from './initWorker';
 import { computedToken } from '../services/request'
 import { useWsLoginStore,LoginStatus } from '../stores/ws';
+import { swichRouter } from '../main';
 
 
 class WS{
@@ -73,15 +74,12 @@ class WS{
                 computedToken.clear();
                 computedToken.get();
                 
-                userStore.isSign = true
+                userStore.isSign = true;
                 loginStore.loginStatus = LoginStatus.Success;
                 loginStore.showLogin = false
                 loginStore.loginQrCode = undefined;
-                
-                // 关闭登录窗口，打开主窗口
-                window.electronAPI.closeLoginAndRegisterWinwod();
-                window.electronAPI.createWindow();
-                
+                console.log("=>",userStore.isSign);
+                swichRouter('/chat');
                 break;
             }
         }
