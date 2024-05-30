@@ -1,5 +1,10 @@
 import { alovaIns } from "./request";
-import { LoginResponse ,UserInfoType} from "./types"
+import { 
+    LoginResponse,
+    UserInfoType,
+    MessageReq,
+    MessageType
+} from "./types"
 import urls from "./urls";
 
 const getRequest = <T>(url: string, config?:any) => alovaIns.Get<T>(url,{...config,localCache:0});
@@ -16,4 +21,6 @@ export default{
     updateAvatar:(params:{uid: string}) => getRequest<void>(urls.updateAvatar,{params}),
       /** 获取用户详细信息 */
     getUserDetail: () => getRequest<UserInfoType>(urls.getUserInfoDetail, {}),
+    /** 发送消息 */
+    sendMsg: (data?: MessageReq) => postRequest<MessageType>(urls.sendMsg, data),
 }

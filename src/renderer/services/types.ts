@@ -20,6 +20,12 @@ export type UserInfoType = {
   avatar: string
   /** 用户名 */
   name: string
+  /**用户openid */
+  openId:string
+  /**用户邮箱 */
+  email:string
+  /**用户性别 */
+  sex:string
 }
 
 /**
@@ -80,6 +86,7 @@ export type MsgUserType = {
   //   describe: string // 描述
   // }
 }
+
 
 /**
  * 消息互动信息
@@ -189,7 +196,7 @@ export type ReplyType ={
  */
 export type MessageReq = {
   roomId:number
-  msgType: MsgEnum
+  messageType: MsgEnum
   body:{
     content?:string
     replyMsgId?:number

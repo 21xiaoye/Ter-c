@@ -9,5 +9,8 @@ export default{
     updateAvatar:`${prefix}/api/user/avatar`,
     getUserInfoDetail: `${prefix}/api/user/userInfo`, // 获取用户信息详情
 
-      sendAddFriendRequest: `${prefix}/api/user/friend/apply`, // 申请好友
+    sendAddFriendRequest: `${prefix}/api/user/friend/apply`, // 申请好友
+
+    // ------------------------- 会话 --------------------------------
+    sendMsg: `${prefix}/api/chat/sendMsg`,
 }

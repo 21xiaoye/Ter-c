@@ -6,13 +6,13 @@ import {
     LoginSuccessResType
 } from './wsType';
 
-
 import { useUserStore } from '../stores/user'
 import shakeTitle from './shakeTitle';
 import { worker } from './initWorker';
 import { computedToken } from '../services/request'
 import { useWsLoginStore,LoginStatus } from '../stores/ws';
 import { swichRouter } from '../main';
+import { ElMessage } from 'element-plus';
 
 
 class WS{
@@ -70,7 +70,7 @@ class WS{
                 userStore.userInfo = { ...userStore.userInfo, ...rest}
                 localStorage.setItem('USER_INFO', JSON.stringify(rest));
                 localStorage.setItem('TOKEN', token);
-
+                // 更强token
                 computedToken.clear();
                 computedToken.get();
                 
@@ -78,9 +78,29 @@ class WS{
                 loginStore.loginStatus = LoginStatus.Success;
                 loginStore.showLogin = false
                 loginStore.loginQrCode = undefined;
-                console.log("=>",userStore.isSign);
                 swichRouter('/chat');
+                ElMessage({
+                    message: '登录成功',
+                    type: 'success',
+                    plain:true
+                })
+                // 获取用户详情
+                userStore.getUserDetailAction();
+                console.log("获取到用户详情",userStore.userInfo);
+                
                 break;
+            }
+            case WsResponseMessageType.TokenExpired:{
+                userStore.isSign = false
+                userStore.userInfo = {}
+                localStorage.removeItem('USER_INFO')
+                localStorage.removeItem('TOKEN')
+                loginStore.loginStatus = LoginStatus.Init
+                ElMessage({
+                    message: '登录已过期,请重新登录',
+                    type: 'warning',
+                    plain:true
+                })
             }
         }
     }

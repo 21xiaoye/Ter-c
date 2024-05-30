@@ -21,11 +21,6 @@ export async function createTray() {
     { label: '退出 Ter', click: () => {
         mainWindow?.destroy();
     }},
-    {
-      label:"退出登录",click:()=>{
-          mainWindow?.webContents.send('clear-local-storage');
-      }
-    }
   ]);
 
   tray.setToolTip('Ter');
@@ -35,7 +30,3 @@ export async function createTray() {
     mainWindow?.show();
   })
 }
-
-ipcMain.on('clear-local-storage-response', (event, arg) => {
-  console.log(arg); // 打印来自渲染进程的响应
-});

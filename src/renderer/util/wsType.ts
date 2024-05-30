@@ -4,9 +4,9 @@ export enum WsResponseMessageType {
     WaitingAuthorize, // 扫码成功，等待授权
     EmailBinding, // 扫码成功，未查询到微信用户注册信息，进行邮箱绑定完成注册
     LoginSuccess, // 登录成功
+    TokenExpired,
     ReceiveMessage,
     OnOffLine,
-    TokenExpired,
     InValidUser,
     WSMsgMarkItem,
     WSMsgRecall,

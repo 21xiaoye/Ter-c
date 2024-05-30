@@ -12,6 +12,7 @@ export function createWindow () {
     minWidth:800,
     minHeight:525,
     icon: path.join(__dirname, 'static/favicon.ico'),
+    title:"ter",
     frame:false,
     webPreferences: {
       preload: join(__dirname, 'preload.js'),

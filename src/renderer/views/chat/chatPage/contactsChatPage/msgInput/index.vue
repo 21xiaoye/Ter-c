@@ -1,6 +1,27 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import apis from '../../../../../services/apis';
+import {
+    MsgEnum
+} from '../../../../../enums/index'
 const textarea = ref('')
+
+const send = (messageType: MsgEnum, body: any) => {
+  apis
+    .sendMsg({ roomId: 1795641785222041600, messageType, body })
+    .send()
+    .then((res) => {
+        console.log(res);
+    })
+}
+
+const textSend = ()=>{
+    console.log("开始发送消息",textarea.value);
+    
+    send(MsgEnum.TEXT,{
+        content:textarea.value
+    });
+}
 </script>
 
 <template>
@@ -20,7 +41,7 @@ const textarea = ref('')
                         </svg>
                     </div>
                 </div>
-                <span>发送</span>
+                <span @click="textSend">发送</span>
             </button>
         </div>
     </div>

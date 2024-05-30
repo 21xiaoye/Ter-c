@@ -9,13 +9,3 @@ contextBridge.exposeInMainWorld('electronAPI', {
   unmaximize:()=>ipcRenderer.send('unmaximize-window'),
   close: () => ipcRenderer.send('close-window')
 })
-
-ipcRenderer.on('clear-local-storage', () => {
-  localStorage.clear();
-  userStore.outLogin();
-  console.log("dqd");
-  
-  console.log('localStorage has been cleared.');
-  // 发送响应回主进程（可选）
-  ipcRenderer.send('clear-local-storage-response', 'localStorage has been cleared.');
-});
