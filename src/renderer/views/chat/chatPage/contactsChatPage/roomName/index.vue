@@ -1,11 +1,23 @@
+<script setup lang="ts">
+import { useChatStore } from '../../../../../stores/chat';
+
+const chatStore = useChatStore();
+const getSessionList = ()=>{
+    console.log("dq");
+    
+    chatStore.getSessionList(true);
+}
+
+</script>
+
 <template>
     <div class="card">
         <div class="room-name">
             <span>管理群</span>
         </div>
-        <div class="edit">
+        <div class="edit" @click="getSessionList">
             <el-icon class="icon" >
-                <MoreFilled />
+                <MoreFilled/>
             </el-icon>
         </div>
     </div>

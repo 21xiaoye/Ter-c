@@ -7,6 +7,7 @@ import {
 } from './wsType';
 
 import { useUserStore } from '../stores/user'
+import { useChatStore } from '../stores/chat';
 import shakeTitle from './shakeTitle';
 import { worker } from './initWorker';
 import { computedToken } from '../services/request'
@@ -46,6 +47,7 @@ class WS{
         const params:{type:WsResponseMessageType; data:unknown} = JSON.parse(value);
         const loginStore = useWsLoginStore();
         const userStore = useUserStore()
+        const chatStore = useChatStore();
         switch(params.type){
             // 获取登录二维码
             case WsResponseMessageType.LoginQrCode:{
@@ -87,7 +89,8 @@ class WS{
                 // 获取用户详情
                 userStore.getUserDetailAction();
                 console.log("获取到用户详情",userStore.userInfo);
-                
+                // 获取会话列表
+                chatStore.getSessionList(true);
                 break;
             }
             case WsResponseMessageType.TokenExpired:{
@@ -101,6 +104,10 @@ class WS{
                     type: 'warning',
                     plain:true
                 })
+            }
+            case WsResponseMessageType.ReceiveMessage:{
+                console.log("收到新消息",params);
+                
             }
         }
     }

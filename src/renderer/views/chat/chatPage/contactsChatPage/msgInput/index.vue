@@ -4,7 +4,12 @@ import apis from '../../../../../services/apis';
 import {
     MsgEnum
 } from '../../../../../enums/index'
-const textarea = ref('')
+import { useChatStore } from '../../../../../stores/chat';
+import { useUserStore } from '../../../../../stores/user';
+
+const textarea = ref('');
+const chatStore = useChatStore();
+const userStore = useUserStore();
 
 const send = (messageType: MsgEnum, body: any) => {
   apis
@@ -15,12 +20,16 @@ const send = (messageType: MsgEnum, body: any) => {
     })
 }
 
-const textSend = ()=>{
-    console.log("开始发送消息",textarea.value);
+const textSend =async ()=>{
+    console.log("开始发送消息legwe",textarea.value);
     
-    send(MsgEnum.TEXT,{
-        content:textarea.value
-    });
+    // send(MsgEnum.TEXT,{
+    //     content:textarea.value
+    // });
+
+    // chatStore.getSessionList(true);
+    const params = { uidList: [1,15] };
+    await apis.createGroup(params);
 }
 </script>
 

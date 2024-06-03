@@ -13,4 +13,7 @@ export default{
 
     // ------------------------- 会话 --------------------------------
     sendMsg: `${prefix}/api/chat/sendMsg`,
+    getSessionList: `${prefix}/api/contact/page`, // 会话列表
+
+    createGroup: `${prefix}/api/room/group`, // 新增群组
 }

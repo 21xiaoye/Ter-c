@@ -6,12 +6,40 @@ import type {
   OnlineEnum,
   RoomTypeEnum,
   SexEnum,
+  IsAllUserEnum
 } from '../enums'
 
 export type LoginResponse = {
     token: string;
     tokenType: string;
 };
+export type ListResponse<T extends unknown> = {
+  /** 游标（下次翻页带上这参数）*/
+  cursor: string
+  /** 是否最后一页 */
+  isLast: boolean
+  list: T[]
+}
+
+/** 会话列表项 */
+export type SessionItem = {
+  /** 房间最后活跃时间(用来排序) */
+  activeTime: number
+  /** 会话头像 */
+  avatar: string
+  /** 是否全员展示的会话 0否 1是 */
+  hot_Flag: IsAllUserEnum
+  /** 会话名称 */
+  name: string
+  /** 房间id */
+  roomId: number
+  /** 最新消息 */
+  text: string
+  /** 房间类型 1群聊 2单聊 */
+  type: RoomTypeEnum
+  /** 未读数 */
+  unreadCount: number
+}
 
 export type UserInfoType = {
   /** 用户唯一标识 */

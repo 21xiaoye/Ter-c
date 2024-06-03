@@ -6,7 +6,7 @@ const path = require('path');
 
 app.whenReady().then(() => {
   createWindow();
-  createTray();
+  // createTray();
   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
     callback({
       responseHeaders: {
@@ -42,18 +42,6 @@ ipcMain.on('message', (event, message) => {
     // mainWindow?.loadFile(`file://${path.join(app.getAppPath(), 'renderer', 'index.html')}#${message}`);
     mainWindow?.loadFile(path.join(app.getAppPath(), 'renderer', 'index.html', `#${path}`));
   }
-})
-
-ipcMain.on('create-main-window',()=>{
-  createTray();
-  createWindow();
-  // if(process.env.NODE_ENV === 'development'){
-  //   const rendererPort = process.argv[2];
-  //   loginRegisterWindow?.loadURL(`http://localhost:${rendererPort}/#/login`);
-  // }
-  // else{
-  //   loginRegisterWindow?.loadFile(path.join(app.getAppPath(), 'renderer', 'index.html', '#/login'));
-  // }
 })
 
 

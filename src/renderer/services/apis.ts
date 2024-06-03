@@ -3,7 +3,9 @@ import {
     LoginResponse,
     UserInfoType,
     MessageReq,
-    MessageType
+    MessageType,
+    ListResponse,
+    SessionItem
 } from "./types"
 import urls from "./urls";
 
@@ -23,4 +25,11 @@ export default{
     getUserDetail: () => getRequest<UserInfoType>(urls.getUserInfoDetail, {}),
     /** 发送消息 */
     sendMsg: (data?: MessageReq) => postRequest<MessageType>(urls.sendMsg, data),
+
+    getSessionList: (params?: any) =>
+      getRequest<ListResponse<SessionItem>>(urls.getSessionList, params),
+
+      /** 新增群组 */
+    createGroup: (params: { uidList: number[] }) =>
+      postRequest<{ id: number }>(urls.createGroup, params),
 }

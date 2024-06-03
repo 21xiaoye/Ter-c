@@ -40,6 +40,13 @@ export enum OnlineEnum {
   /** 离线 */
   OFFLINE,
 }
+/** 是否全员展示的会话 0否 1是 */
+export enum IsAllUserEnum {
+  /** 0否 */
+  Not,
+  /** 1是 */
+  Yes,
+}
 
 /**
  * 操作类型
